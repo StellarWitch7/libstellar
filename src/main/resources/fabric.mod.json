@@ -1,0 +1,47 @@
+{
+	"schemaVersion": 1,
+	"id": "libstellar",
+	"version": "${version}",
+	"name": "libstellar",
+	"description": "Personal boilerplate utilities for my Kotlin mods",
+	"authors": [
+		"StellarWitch7"
+	],
+	"contact": {
+		"homepage": "https://github.com/StellarWitchy/libstellar",
+		"sources": "https://github.com/StellarWitchy/libstellar"
+	},
+	"license": "MIT",
+	"icon": "assets/libstellar/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "stellarwitch7.libstellar.Libstellar",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "stellarwitch7.libstellar.LibstellarClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"libstellar.mixins.json",
+		{
+			"config": "libstellar.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	},
+	"suggests": {
+	}
+}
