@@ -14,7 +14,7 @@ interface Registrar<T> {
     fun register() {
     }
 
-    fun register(name: String, value: T): T {
+    fun <V : T> register(name: String, value: V): V {
         return Registry.register(registry, id(name), value)
     }
 }
