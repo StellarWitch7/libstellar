@@ -1,4 +1,4 @@
-package stellarwitch7.libstellar.codec
+package stellarwitch7.libstellar.registry.codec
 
 import com.mojang.serialization.MapCodec
 
