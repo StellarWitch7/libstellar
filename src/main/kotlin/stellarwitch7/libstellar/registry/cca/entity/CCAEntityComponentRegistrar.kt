@@ -11,6 +11,8 @@ import stellarwitch7.libstellar.registry.cca.CCAComponentRegistrar
 import kotlin.reflect.KClass
 
 abstract class CCAEntityComponentRegistrar : CCAComponentRegistrar<EntityComponentFactoryRegistry>, EntityComponentInitializer {
+    override val registered: ArrayList<(EntityComponentFactoryRegistry) -> Unit> = ArrayList()
+
     fun <C : Component, T : Entity> register(name: String, c: KClass<C>, factory: (Entity) -> C, t: KClass<T>): ComponentKey<C> {
         val result = makeKey(name, c)
         registered.add { registry -> registry.registerFor(t.java, result, factory) }
