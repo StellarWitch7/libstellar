@@ -11,13 +11,13 @@ import stellarwitch7.libstellar.registry.cca.CCAComponentRegistrar
 import kotlin.reflect.KClass
 
 abstract class CCAEntityComponentRegistrar : CCAComponentRegistrar<EntityComponentFactoryRegistry>, EntityComponentInitializer {
-    private fun <C : Component, T : Entity> register(name: String, c: KClass<C>, factory: (Entity) -> C, t: KClass<T>): ComponentKey<C> {
+    fun <C : Component, T : Entity> register(name: String, c: KClass<C>, factory: (Entity) -> C, t: KClass<T>): ComponentKey<C> {
         val result = makeKey(name, c)
         registered.add { registry -> registry.registerFor(t.java, result, factory) }
         return result;
     }
 
-    private fun <C : Component> register(name: String, c: KClass<C>, factory: (PlayerEntity) -> C, copyStrat: RespawnCopyStrategy<Component>): ComponentKey<C> {
+    fun <C : Component> register(name: String, c: KClass<C>, factory: (PlayerEntity) -> C, copyStrat: RespawnCopyStrategy<Component>): ComponentKey<C> {
         val result = makeKey(name, c)
         registered.add { registry -> registry.registerForPlayers(result, factory, copyStrat) }
         return result;
