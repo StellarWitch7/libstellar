@@ -40,7 +40,9 @@
 		"minecraft": "~1.21",
 		"java": ">=21",
 		"fabric-api": "*",
-		"fabric-language-kotlin": "*"
+		"fabric-language-kotlin": "*",
+		"owo-lib": ">=0.12.10+1.21",
+		"cicada": ">=0.8.3+1.21-and-above"
 	},
 	"suggests": {
 	}
