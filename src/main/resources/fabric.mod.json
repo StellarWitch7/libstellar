@@ -3,7 +3,7 @@
 	"id": "libstellar",
 	"version": "${version}",
 	"name": "libstellar",
-	"description": "Personal boilerplate utilities for my Kotlin mods",
+	"description": "Utility library for my Fabric mods. Intended for usage in Kotlin",
 	"authors": [
 		"StellarWitch7"
 	],
