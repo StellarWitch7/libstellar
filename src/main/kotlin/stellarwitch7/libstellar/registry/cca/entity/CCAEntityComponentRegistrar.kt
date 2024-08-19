@@ -14,15 +14,19 @@ abstract class CCAEntityComponentRegistrar : CCAComponentRegistrar<EntityCompone
     override val registered: ArrayList<(EntityComponentFactoryRegistry) -> Unit> = ArrayList()
 
     fun <C : Component, T : Entity> register(name: String, c: KClass<C>, factory: (Entity) -> C, t: KClass<T>): ComponentKey<C> {
-        val result = makeKey(name, c)
-        registered.add { registry -> registry.registerFor(t.java, result, factory) }
-        return result
+        return register(makeKey(name, c), factory, t)
+    }
+
+    fun <C : Component, T : Entity> register(key: ComponentKey<C>, factory: (Entity) -> C, t: KClass<T>): ComponentKey<C> {
+        return register(key, { registry, key -> registry.registerFor(t.java, key, factory) })
     }
 
     fun <C : Component> register(name: String, c: KClass<C>, factory: (PlayerEntity) -> C, copyStrat: RespawnCopyStrategy<Component>): ComponentKey<C> {
-        val result = makeKey(name, c)
-        registered.add { registry -> registry.registerForPlayers(result, factory, copyStrat) }
-        return result
+        return register(makeKey(name, c), factory, copyStrat)
+    }
+
+    fun <C : Component> register(key: ComponentKey<C>, factory: (PlayerEntity) -> C, copyStrat: RespawnCopyStrategy<Component>): ComponentKey<C> {
+        return register(key, { registry, key -> registry.registerForPlayers(key, factory, copyStrat) })
     }
 
     override fun registerEntityComponentFactories(registry: EntityComponentFactoryRegistry) {

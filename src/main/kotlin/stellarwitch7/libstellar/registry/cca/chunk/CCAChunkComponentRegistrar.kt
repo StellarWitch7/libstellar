@@ -12,9 +12,11 @@ abstract class CCAChunkComponentRegistrar : CCAComponentRegistrar<ChunkComponent
     override val registered: ArrayList<(ChunkComponentFactoryRegistry) -> Unit> = ArrayList()
 
     fun <C : Component> register(name: String, c: KClass<C>, factory: (Chunk) -> C): ComponentKey<C> {
-        val result = makeKey(name, c)
-        registered.add { registry -> registry.register(result, factory) }
-        return result
+        return register(makeKey(name, c), factory)
+    }
+
+    fun <C : Component> register(key: ComponentKey<C>, factory: (Chunk) -> C): ComponentKey<C> {
+        return register(key, { registry, key -> registry.register(key, factory) })
     }
 
     override fun registerChunkComponentFactories(registry: ChunkComponentFactoryRegistry) {
