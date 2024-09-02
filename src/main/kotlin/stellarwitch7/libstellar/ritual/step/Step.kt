@@ -32,5 +32,7 @@ interface Step : CodecTypeProvider<Step> {
         val consumeItem: CodecType<Step> = register("consume_item", ConsumeItemStep.codec)
         val dropItem: CodecType<Step> = register("drop_item", DropItemStep.codec)
         val summonEntity: CodecType<Step> = register("summon_entity", SummonEntityStep.codec)
+        val playSound: CodecType<Step> = register("play_sound", PlaySoundStep.codec)
+        val spawnParticles: CodecType<Step> = register("spawn_particles", SpawnParticlesStep.codec)
     }
 }

@@ -24,9 +24,11 @@ class ClearCandleStep(private val offset: BlockPos) : Step {
 
         if (state.isIn(BlockTags.CANDLES) && state.get(CandleBlock.LIT)) {
             world.setBlockState(pos, state.with(CandleBlock.LIT, false))
+
+            val pos = pos.toCenterPos()
             world.spawnParticles(ParticleTypes.SOUL,
-                pos.x.toDouble() + 0.5, pos.y.toDouble(), pos.z.toDouble() + 0.5,
-                9, 0.2, 0.0, 0.2, 0.0
+                pos.x, pos.y, pos.z,
+                9, 0.2, 0.2, 0.2, 0.0
             )
 
             return true

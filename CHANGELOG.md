@@ -1,1 +1,1 @@
-- Polished and ensured the fix from 1.1.5 is applied to conditional steps as well
+- Added two new built-in ritual steps
