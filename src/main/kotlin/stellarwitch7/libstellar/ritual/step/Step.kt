@@ -23,8 +23,7 @@ interface Step : CodecTypeProvider<Step> {
 
     companion object : CodecRegistrar<Step> {
         override val modID: String = Libstellar.MOD_ID
-        override val name: String = "step"
-        override val registry: Registry<CodecType<Step>> = makeReg()
+        override val registry: Registry<CodecType<Step>> = makeReg("step")
 
         val sleep: CodecType<Step> = register("sleep", SleepStep.codec)
         val multi: CodecType<Step> = register("multi", MultiStep.codec)
