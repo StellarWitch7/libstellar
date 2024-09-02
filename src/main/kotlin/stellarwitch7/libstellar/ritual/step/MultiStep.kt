@@ -7,7 +7,7 @@ import net.minecraft.server.world.ServerWorld
 import stellarwitch7.libstellar.registry.codec.CodecType
 import stellarwitch7.libstellar.ritual.Ritual
 import stellarwitch7.libstellar.ritual.step.Step.Companion.multi
-import stellarwitch7.libstellar.ritual.step.Step.Companion.queueCodec
+import stellarwitch7.libstellar.utils.KCodecUtils
 
 /**
  * Executes multiple steps as a separate queue with its own rate of execution.
@@ -33,11 +33,14 @@ class MultiStep(val steps: ArrayDeque<Step>, val executionLimit: Int = 20) : Ste
     }
 
     companion object {
-        val codec: MapCodec<MultiStep> = RecordCodecBuilder.mapCodec { builder ->
-            builder.group(
-                queueCodec.fieldOf("steps").forGetter(MultiStep::steps),
-                Codec.INT.fieldOf("execution_limit").forGetter(MultiStep::executionLimit)
-            ).apply(builder, ::MultiStep)
+        // Must be as lazy as possible due to static init nonsense
+        val codec: MapCodec<MultiStep> = KCodecUtils.lazyMapCodec {
+            RecordCodecBuilder.mapCodec { builder ->
+                builder.group(
+                    Codec.lazyInitialized { KCodecUtils.queueCodec(Step.codec) }.fieldOf("steps").forGetter(MultiStep::steps),
+                    Codec.INT.fieldOf("execution_limit").forGetter(MultiStep::executionLimit)
+                ).apply(builder, ::MultiStep)
+            }
         }
     }
 }

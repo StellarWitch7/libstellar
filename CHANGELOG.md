@@ -1,2 +1,1 @@
-- Reverted the last release
-- Hopefully fixed recursive codec init
+- Hopefully fixed recursive codec init (again)

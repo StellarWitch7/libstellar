@@ -1,6 +1,5 @@
 package stellarwitch7.libstellar.ritual.step
 
-import com.mojang.serialization.Codec
 import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
 import stellarwitch7.libstellar.Libstellar
@@ -33,10 +32,5 @@ interface Step : CodecTypeProvider<Step> {
         val consumeItem: CodecType<Step> = register("consume_item", ConsumeItemStep.codec)
         val dropItem: CodecType<Step> = register("drop_item", DropItemStep.codec)
         val summonEntity: CodecType<Step> = register("summon_entity", SummonEntityStep.codec)
-
-        /**
-         * A codec for serializing a ritual's step queue as a list.
-         */
-        val queueCodec: Codec<ArrayDeque<Step>> = Step.codec.listOf().xmap(::ArrayDeque, ArrayDeque<Step>::toList)
     }
 }

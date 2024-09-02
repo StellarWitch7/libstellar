@@ -9,6 +9,7 @@ import stellarwitch7.libstellar.registry.codec.CodecRegistrar
 import stellarwitch7.libstellar.registry.codec.CodecType
 import stellarwitch7.libstellar.registry.codec.CodecTypeProvider
 import stellarwitch7.libstellar.ritual.step.Step
+import stellarwitch7.libstellar.utils.KCodecUtils
 
 /**
  * A multi-step, multi-block "ritual" process.
@@ -63,7 +64,7 @@ abstract class Ritual(val pos: BlockPos, steps: ArrayDeque<Step>) : CodecTypePro
             return register(name, RecordCodecBuilder.mapCodec { builder ->
                 builder.group(
                     BlockPos.CODEC.fieldOf("pos").forGetter(Ritual::pos),
-                    Step.queueCodec.fieldOf("steps").forGetter(Ritual::steps)
+                    KCodecUtils.queueCodec(Step.codec).fieldOf("steps").forGetter(Ritual::steps)
                 ).apply(builder, constructor)
             })
         }
