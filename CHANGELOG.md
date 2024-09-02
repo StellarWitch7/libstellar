@@ -1,1 +1,1 @@
-- Removed unnecessary code in CodecRegistrar<T>
+- Ensured `Step`s and `Ritual`s are initialised when libstellar is
