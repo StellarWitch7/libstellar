@@ -6,6 +6,7 @@ import net.minecraft.server.world.ServerWorld
 import stellarwitch7.libstellar.registry.codec.CodecType
 import stellarwitch7.libstellar.ritual.Ritual
 import stellarwitch7.libstellar.ritual.step.Step.Companion.conditional
+import stellarwitch7.libstellar.utils.KCodecUtils
 
 /**
  * Executes a step, and pushes one of two other steps depending on the result.
@@ -25,12 +26,14 @@ class ConditionalStep(val condition: Step, val then: Step, val otherwise: Step) 
     }
 
     companion object {
-        val codec: MapCodec<ConditionalStep> = RecordCodecBuilder.mapCodec { builder ->
-            builder.group(
-                Step.codec.fieldOf("condition").forGetter(ConditionalStep::condition),
-                Step.codec.fieldOf("then").forGetter(ConditionalStep::then),
-                Step.codec.fieldOf("otherwise").forGetter(ConditionalStep::otherwise)
-            ).apply(builder, ::ConditionalStep)
+        val codec: MapCodec<ConditionalStep> = KCodecUtils.lazyMapCodec {
+            RecordCodecBuilder.mapCodec { builder ->
+                builder.group(
+                    Step.codec.fieldOf("condition").forGetter(ConditionalStep::condition),
+                    Step.codec.fieldOf("then").forGetter(ConditionalStep::then),
+                    Step.codec.fieldOf("otherwise").forGetter(ConditionalStep::otherwise)
+                ).apply(builder, ::ConditionalStep)
+            }
         }
     }
 }

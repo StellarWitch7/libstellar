@@ -33,11 +33,10 @@ class MultiStep(val steps: ArrayDeque<Step>, val executionLimit: Int = 20) : Ste
     }
 
     companion object {
-        // Must be as lazy as possible due to static init nonsense
         val codec: MapCodec<MultiStep> = KCodecUtils.lazyMapCodec {
             RecordCodecBuilder.mapCodec { builder ->
                 builder.group(
-                    Codec.lazyInitialized { KCodecUtils.queueCodec(Step.codec) }.fieldOf("steps").forGetter(MultiStep::steps),
+                    KCodecUtils.queueCodec(Step.codec).fieldOf("steps").forGetter(MultiStep::steps),
                     Codec.INT.fieldOf("execution_limit").forGetter(MultiStep::executionLimit)
                 ).apply(builder, ::MultiStep)
             }
