@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
+	id "me.modmuss50.mod-publish-plugin" version "0.4.4"
 	id "org.jetbrains.kotlin.jvm" version "2.0.0"
 }
 
@@ -146,4 +147,61 @@ publishing {
 			from components.java
 		}
 	}
+}
+
+publishMods {
+	file = remapJar.archiveFile
+	displayName = "libstellar ${property('mod_version')} for Minecraft ${property('deps.minecraft')}"
+	version = project.version
+	changelog = getRootProject().file("CHANGELOG.md").text
+	type = STABLE
+	modLoaders.add("fabric")
+
+	def min = property('publish_target_min')
+	def max = property('publish_target_max')
+
+	if (providers.gradleProperty('modrinthToken').present) {
+		modrinth {
+			projectId = property('mod_modrinth')
+			accessToken = providers.gradleProperty('modrinthToken').get()
+
+			if (min == max) {
+				minecraftVersions.add(min)
+			} else {
+				minecraftVersionRange {
+					start = min
+					end = max
+				}
+			}
+
+			requires {
+				slug = "owo-lib"
+			}
+			requires {
+				slug = "cicada"
+			}
+			requires {
+				slug = "fabric-language-kotlin"
+			}
+			requires {
+				slug = "fabric-api"
+			}
+		}
+	}
+
+	if (providers.gradleProperty('githubToken').present) {
+		github {
+			repository = property('mod_github')
+			accessToken = providers.gradleProperty('githubToken').get()
+
+			commitish = property('git_branch')
+			tagName = project.version
+		}
+	}
+}
+
+tasks.register('publishAll') {
+	group 'publishing'
+	dependsOn 'publish'
+	dependsOn 'publishMods'
 }
