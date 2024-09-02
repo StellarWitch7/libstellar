@@ -1,1 +1,1 @@
-- Added multi-step, multi-block ritual components
+- Removed unnecessary code in CodecRegistrar<T>
