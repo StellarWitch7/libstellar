@@ -1,1 +1,2 @@
-- Made CodecRegistrar's `codec` property even more lazy
+- Reverted the last release
+- Hopefully fixed recursive codec init
