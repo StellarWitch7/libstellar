@@ -52,8 +52,7 @@ abstract class Ritual(val pos: BlockPos, steps: ArrayDeque<Step>) : CodecTypePro
 
     companion object : CodecRegistrar<Ritual> {
         override val modID: String = Libstellar.MOD_ID
-        override val name: String = "ritual"
-        override val registry: Registry<CodecType<Ritual>> = makeReg()
+        override val registry: Registry<CodecType<Ritual>> = makeReg("ritual")
 
         /**
          * Registers a new ritual with the default codec, for convenience.
