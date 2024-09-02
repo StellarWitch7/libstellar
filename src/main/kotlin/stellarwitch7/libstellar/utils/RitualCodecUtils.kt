@@ -7,5 +7,5 @@ object RitualCodecUtils {
     /**
      * A codec for serializing a ritual's step queue as a list.
      */
-    val steps: Codec<ArrayDeque<Step>> = Step.codec.codec().listOf().xmap(::ArrayDeque, ArrayDeque<Step>::toList)
+    val steps: Codec<ArrayDeque<Step>> = Step.codec.listOf().xmap(::ArrayDeque, ArrayDeque<Step>::toList)
 }

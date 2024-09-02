@@ -1,1 +1,1 @@
-- Ensured `Step`s and `Ritual`s are initialised when libstellar is
+- Made CodecRegistrar's `codec` property even more lazy
