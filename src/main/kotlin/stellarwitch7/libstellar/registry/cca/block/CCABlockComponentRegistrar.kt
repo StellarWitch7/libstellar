@@ -11,11 +11,11 @@ import kotlin.reflect.KClass
 abstract class CCABlockComponentRegistrar : CCAComponentRegistrar<BlockComponentFactoryRegistry>, BlockComponentInitializer {
     override val registered: ArrayList<(BlockComponentFactoryRegistry) -> Unit> = ArrayList()
 
-    fun <C : Component, T : BlockEntity> register(name: String, c: KClass<C>, factory: (BlockEntity) -> C, t: KClass<T>): ComponentKey<C> {
+    fun <C : Component, T : BlockEntity> register(name: String, c: KClass<C>, factory: (T) -> C, t: KClass<T>): ComponentKey<C> {
         return register(makeKey(name, c), factory, t)
     }
 
-    fun <C : Component, T : BlockEntity> register(key: ComponentKey<C>, factory: (BlockEntity) -> C, t: KClass<T>): ComponentKey<C> {
+    fun <C : Component, T : BlockEntity> register(key: ComponentKey<C>, factory: (T) -> C, t: KClass<T>): ComponentKey<C> {
         return register(key, { registry, key -> registry.registerFor(t.java, key, factory) })
     }
 

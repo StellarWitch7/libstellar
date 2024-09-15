@@ -1,1 +1,1 @@
-- Added two new built-in ritual steps
+- Fixed CCA block component registrars requiring a non-generic constructor when registering.
