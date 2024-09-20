@@ -1,1 +1,3 @@
-- Fixed CCA block component registrars requiring a non-generic constructor when registering.
+- Fixed CCA entity component registrars requiring a non-generic constructor when registering.
+- Added CCA's world module.
+- Made project use `modApi` for certain dependencies.
