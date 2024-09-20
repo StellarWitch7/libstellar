@@ -12,12 +12,12 @@ import kotlin.reflect.KClass
 abstract class CCAWorldComponentRegistrar : CCAComponentRegistrar<WorldComponentFactoryRegistry>, WorldComponentInitializer {
     override val registered: ArrayList<(WorldComponentFactoryRegistry) -> Unit> = ArrayList()
 
-    fun <C : Component> register(name: String, c: KClass<C>, factory: (World) -> C, t: RegistryKey<World>): ComponentKey<C> {
+    fun <C : Component> register(name: String, c: KClass<C>, factory: (World) -> C, t: RegistryKey<World>?): ComponentKey<C> {
         return register(makeKey(name, c), factory, t)
     }
 
-    fun <C : Component> register(key: ComponentKey<C>, factory: (World) -> C, t: RegistryKey<World>): ComponentKey<C> {
-        return register(key, { registry, key -> registry.registerFor(t, key, factory) })
+    fun <C : Component> register(key: ComponentKey<C>, factory: (World) -> C, t: RegistryKey<World>?): ComponentKey<C> {
+        return register(key, { registry, key -> if (t == null) registry.register(key, factory) else registry.registerFor(t, key, factory) })
     }
 
     override fun registerWorldComponentFactories(registry: WorldComponentFactoryRegistry) {

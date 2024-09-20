@@ -1,3 +1,1 @@
-- Fixed CCA entity component registrars requiring a non-generic constructor when registering.
-- Added CCA's world module.
-- Made project use `modApi` for certain dependencies.
+- Fixed the world module requiring a registry key.
