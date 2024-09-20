@@ -76,19 +76,18 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-language-kotlin:${property('deps.kotlin')}"
 
 	// owo
-	annotationProcessor modImplementation("io.wispforest:owo-lib:${property('deps.owo-lib')}")
+	annotationProcessor modApi("io.wispforest:owo-lib:${property('deps.owo-lib')}")
 	include "io.wispforest:owo-sentinel:${property('deps.owo-lib')}"
 
 	// CICADA
-	modImplementation("nl.enjarai:cicada-lib:${property('deps.cicada')}") {
-		exclude group: "net.fabricmc.fabric-api"
-	}
+	modApi("nl.enjarai:cicada-lib:${property('deps.cicada')}")
 
 	// CCA
-	include modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${property('deps.cardinal-components-api')}")
-	include modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${property('deps.cardinal-components-api')}")
-	include modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-chunk:${property('deps.cardinal-components-api')}")
-	include modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-block:${property('deps.cardinal-components-api')}")
+	include modApi("org.ladysnake.cardinal-components-api:cardinal-components-base:${property('deps.cardinal-components-api')}")
+	include modApi("org.ladysnake.cardinal-components-api:cardinal-components-entity:${property('deps.cardinal-components-api')}")
+	include modApi("org.ladysnake.cardinal-components-api:cardinal-components-chunk:${property('deps.cardinal-components-api')}")
+	include modApi("org.ladysnake.cardinal-components-api:cardinal-components-block:${property('deps.cardinal-components-api')}")
+	include modApi("org.ladysnake.cardinal-components-api:cardinal-components-world:${property('deps.cardinal-components-api')}")
 }
 
 processResources {
