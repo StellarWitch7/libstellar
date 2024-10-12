@@ -10,6 +10,8 @@ import net.minecraft.util.math.BlockPos
 import stellarwitch7.libstellar.registry.codec.CodecType
 import stellarwitch7.libstellar.ritual.Ritual
 import scala.collection.mutable.ArrayDeque
+import net.minecraft.state.property.BooleanProperty
+import net.minecraft.state.property.Property
 
 /**
  * Succeeds if there is a lit candle at the given offset from the ritual centre. The candle is blown out.
@@ -22,8 +24,8 @@ class ClearCandleStep(private val offset: BlockPos) extends Step {
     val pos = ritual.pos.add(offset)
     val state = world.getBlockState(pos)
 
-    if state.isIn(BlockTags.CANDLES) && state.get(CandleBlock.LIT) then {
-      world.setBlockState(pos, state.`with`(CandleBlock.LIT, false))
+    if state.isIn(BlockTags.CANDLES) && state.get[Boolean](ClearCandleStep.LIT_CANDLES) then {
+      world.setBlockState(pos, state.`with`[Boolean, Boolean](ClearCandleStep.LIT_CANDLES, false))
 
       val vec = pos.toCenterPos()
       world.spawnParticles(ParticleTypes.SOUL,
@@ -42,4 +44,6 @@ object ClearCandleStep {
   val codec: MapCodec[ClearCandleStep] = RecordCodecBuilder.mapCodec(builder => builder.group(
     BlockPos.CODEC.fieldOf("offset").forGetter(_.offset)
   ).apply(builder, ClearCandleStep(_)))
+
+  private val LIT_CANDLES = CandleBlock.LIT.asInstanceOf[Property[Boolean]]
 }
