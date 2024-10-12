@@ -24,8 +24,8 @@ class ClearCandleStep(private val offset: BlockPos) extends Step {
     val pos = ritual.pos.add(offset)
     val state = world.getBlockState(pos)
 
-    if state.isIn(BlockTags.CANDLES) && state.get[Boolean](ClearCandleStep.LIT_CANDLES) then {
-      world.setBlockState(pos, state.`with`[Boolean, Boolean](ClearCandleStep.LIT_CANDLES, false))
+    if state.isIn(BlockTags.CANDLES) && state.get[java.lang.Boolean](CandleBlock.LIT) then {
+      world.setBlockState(pos, state.`with`(CandleBlock.LIT, false))
 
       val vec = pos.toCenterPos()
       world.spawnParticles(ParticleTypes.SOUL,
@@ -44,6 +44,4 @@ object ClearCandleStep {
   val codec: MapCodec[ClearCandleStep] = RecordCodecBuilder.mapCodec(builder => builder.group(
     BlockPos.CODEC.fieldOf("offset").forGetter(_.offset)
   ).apply(builder, ClearCandleStep(_)))
-
-  private val LIT_CANDLES = CandleBlock.LIT.asInstanceOf[Property[Boolean]]
 }
