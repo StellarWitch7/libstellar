@@ -1,49 +1,49 @@
 {
-	"schemaVersion": 1,
-	"id": "libstellar",
-	"version": "${version}",
-	"name": "libstellar",
-	"description": "Utility library for my Fabric mods. Intended for usage in Kotlin",
-	"authors": [
-		"StellarWitch7"
-	],
-	"contact": {
-		"homepage": "https://github.com/StellarWitch7/libstellar",
-		"sources": "https://github.com/StellarWitch7/libstellar"
-	},
-	"license": "MIT",
-	"icon": "assets/libstellar/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			{
-				"value": "stellarwitch7.libstellar.Libstellar",
-				"adapter": "kotlin"
-			}
-		],
-		"client": [
-			{
-				"value": "stellarwitch7.libstellar.LibstellarClient",
-				"adapter": "kotlin"
-			}
-		]
-	},
-	"mixins": [
-		"libstellar.mixins.json",
-		{
-			"config": "libstellar.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.15.11",
-		"minecraft": "~1.21",
-		"java": ">=21",
-		"fabric-api": "*",
-		"fabric-language-kotlin": "*",
-		"owo-lib": ">=0.12.10+1.21",
-		"cicada": ">=0.8.3+1.21-and-above"
-	},
-	"suggests": {
-	}
+    "schemaVersion": 1,
+    "id": "libstellar",
+    "version": "${version}",
+    "name": "libstellar",
+    "description": "Utility library for my Fabric mods. Intended for usage in Kotlin",
+    "authors": [
+        "StellarWitch7"
+    ],
+    "contact": {
+        "homepage": "https://github.com/StellarWitch7/libstellar",
+        "sources": "https://github.com/StellarWitch7/libstellar"
+    },
+    "license": "MIT",
+    "icon": "assets/libstellar/icon.png",
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            {
+                "value": "stellarwitch7.libstellar.Libstellar",
+                "adapter": "kotori_scala"
+            }
+        ],
+        "client": [
+            {
+                "value": "stellarwitch7.libstellar.LibstellarClient",
+                "adapter": "kotori_scala"
+            }
+        ]
+    },
+    "mixins": [
+        "libstellar.mixins.json",
+        {
+            "config": "libstellar.client.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "fabricloader": ">=0.15.11",
+        "minecraft": "~1.21",
+        "java": ">=21",
+        "fabric-api": "*",
+        "kotori_scala": "*",
+        "owo-lib": ">=0.12.10+1.21",
+        "cicada": ">=0.8.3+1.21-and-above"
+    },
+    "suggests": {
+    }
 }
