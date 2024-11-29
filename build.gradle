@@ -179,7 +179,7 @@ publishMods {
                 slug = "cicada"
             }
             requires {
-                slug = "fabric-language-kotlin"
+                slug = "scalable-cats-force"
             }
             requires {
                 slug = "fabric-api"
