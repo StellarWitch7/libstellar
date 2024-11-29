@@ -1,1 +1,1 @@
-- Re-written in Scala
+- Fixed a poorly marked dependency
