@@ -9,7 +9,8 @@
     ],
     "contact": {
         "homepage": "https://github.com/StellarWitch7/libstellar",
-        "sources": "https://github.com/StellarWitch7/libstellar"
+        "sources": "https://github.com/StellarWitch7/libstellar",
+        "issues": "https://github.com/StellarWitch7/libstellar/issues"
     },
     "license": "MIT",
     "icon": "assets/libstellar/icon.png",
