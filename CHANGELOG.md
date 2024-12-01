@@ -1,1 +1,1 @@
-- Fixed a poorly marked dependency
+- Fixed the mod icon being corrupted
